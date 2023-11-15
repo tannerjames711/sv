@@ -1,11 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Image, Pressable, SafeAreaView, TextInput, Alert, Header } from "react-native";
+import { StyleSheet, Text, View, Image, Pressable, SafeAreaView, TextInput, Alert, ScrollView, KeyboardAvoidingView, KeyboardAwareScrollView } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import DateTimePicker from 'react-native-ui-datepicker';
 import dayjs from 'dayjs';
+import { SelectList } from 'react-native-dropdown-select-list'
 
 const Stack = createNativeStackNavigator();
 
@@ -15,10 +16,22 @@ export default function Offer() {
     const [addyVal1, onChangeAddy1] = React.useState('');
     const [addyVal2, onChangeAddy2] = React.useState('');
     const [value, setValue] = useState(dayjs());
-
-
+    const [selected, setSelected] = React.useState("");
+  
+    const data = [
+        {key:'1', value:'10 min'},
+        {key:'2', value:'15 min'},
+        {key:'3', value:'30 min'},
+    ]
+    const parkingData = [
+      {key:'1', value:'Street Parking'},
+      {key:'2', value:'Premier Parking'},
+  ]
+  
     return (
       <SafeAreaView style={styles.container}>
+        <KeyboardAvoidingView behavior='padding'>
+        <ScrollView>
         <Text style={styles.questions}> Where are you going? </Text>
         <TextInput
         style={styles.input}
@@ -46,20 +59,76 @@ export default function Offer() {
         <DateTimePicker
         value={value}
         onValueChange={(date) => setValue(date)}
-        headerButtonColor= "white"
+        headerButtonColor= "#3FFF1B"
         selectedTextStyle={{
             fontWeight: 'bold',
-            color: 'white',
+            color: '#3FFF1B',
           }}
           calendarTextStyle={{
-            fontWeight: 'bold',
-            color: 'white',
+            color: '#3FFF1B',
           }}
           headerTextStyle =
-          {{color: 'white'}}
+          {{color: '#3FFF1B'}}
+          weekDaysTextStyle =
+          {{color: '#3FFF1B'}}
       />
+        <Text style={styles.questions}> How much do you want to charge? </Text>
+        <TextInput
+        style={styles.input}
+        onChangeText={onChangeAddy1}
+        value={addyVal1}
+        placeholder="Address Line 1"
+        keyboardType="numeric"
+      />
+        <Text style={styles.questions}> When are meeting to drive back? </Text>
+        <SelectList 
+        setSelected={(val) => setSelected(val)} 
+        data={data} 
+        save="value"
+        search ='false'
+        inputStyles = {{color: "white"}}
+        dropdownStyles = {{
+          backgroundColor: "#3D3D3D",
+          color: 'white',
+          width: '50%'
 
+        }}
+        boxStyles = {{
+          backgroundColor: "#3D3D3D",
+          color: 'white',
+          width: '50%'
+        }}
+        dropdownTextStyles = {{
+          color: 'white'
+        }}
+    />
+        <Text style={styles.questions}> What type of parking do you plan on having? </Text>
+        <SelectList 
+        setSelected={(val) => setSelected(val)} 
+        data={parkingData} 
+        save="value"
+        search ='false'
+        inputStyles = {{color: "white"}}
+        dropdownStyles = {{
+          backgroundColor: "#3D3D3D",
+          color: 'white',
+          width: '50%'
+
+        }}
+        boxStyles = {{
+          backgroundColor: "#3D3D3D",
+          color: 'white',
+          width: '50%'
+        }}
+        dropdownTextStyles = {{
+          color: 'white'
+        }}
+        />
+        <Text style={styles.questions}> Safety Agreement: </Text>
+        
         <StatusBar style="auto" />
+        </ScrollView>
+        </KeyboardAvoidingView>
       </SafeAreaView>
     );
   }
