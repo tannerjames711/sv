@@ -12,6 +12,11 @@ const Stack = createNativeStackNavigator();
 function HomeScreen() {
   return (
     <SafeAreaView style={styles.container}>
+        <Pressable style={styles.eventListing} onPress={() => navigation.navigate("Offer") }>
+        <Text style={styles.text}> Offer to Drive</Text>
+        <Text style={styles.text}> Offer to Drive</Text>
+
+    </Pressable>
       <StatusBar style="auto" />
     </SafeAreaView>
   );
@@ -73,7 +78,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'black',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'right',
   },
   button: {
     alignItems: 'center',
@@ -83,5 +88,15 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     elevation: 3,
     backgroundColor: '#3FFF1B',
+  },
+  eventListing: {
+    alignItems: 'right',
+    width: '95%',
+    justifyContent: 'right',
+    paddingVertical: 5,
+    paddingHorizontal: 15,
+    borderRadius: 4,
+    elevation: 3,
+    backgroundColor: '#3D3D3D',
   }
 });

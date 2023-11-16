@@ -6,27 +6,28 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import DateTimePicker from 'react-native-ui-datepicker';
 import dayjs from 'dayjs';
-import { SelectList } from 'react-native-dropdown-select-list'
+import { SelectList } from 'react-native-dropdown-select-list';
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 const Stack = createNativeStackNavigator();
 
 
 export default function Offer() {
-    const [number, onChangeNumber] = React.useState('');
-    const [addyVal1, onChangeAddy1] = React.useState('');
-    const [addyVal2, onChangeAddy2] = React.useState('');
-    const [value, setValue] = useState(dayjs());
-    const [selected, setSelected] = React.useState("");
+  const [number, onChangeNumber] = React.useState('');
+  const [addyVal1, onChangeAddy1] = React.useState('');
+  const [addyVal2, onChangeAddy2] = React.useState('');
+  const [value, setValue] = useState(dayjs());
+  const [selected, setSelected] = React.useState("");
   
-    const data = [
-        {key:'1', value:'10 min'},
-        {key:'2', value:'15 min'},
-        {key:'3', value:'30 min'},
+  const data = [
+    {key:'1', value:'10 min'},
+    {key:'2', value:'15 min'},
+    {key:'3', value:'30 min'},
     ]
     const parkingData = [
-      {key:'1', value:'Street Parking'},
-      {key:'2', value:'Premier Parking'},
-  ]
+    {key:'1', value:'Street Parking'},
+    {key:'2', value:'Premier Parking'},
+    ]
   
     return (
       <SafeAreaView style={styles.container}>
@@ -53,6 +54,20 @@ export default function Offer() {
         onChangeText={onChangeAddy2}
         value={addyVal2}
         placeholder="Address Line 2"
+        keyboardType="default"
+      />
+        <TextInput
+        style={styles.input}
+        onChangeText={onChangeAddy2}
+        value={addyVal2}
+        placeholder="City"
+        keyboardType="default"
+      />
+              <TextInput
+        style={styles.input}
+        onChangeText={onChangeAddy2}
+        value={addyVal2}
+        placeholder="State"
         keyboardType="default"
       />
         <Text style={styles.questions}> When are you leaving? </Text>
@@ -125,7 +140,12 @@ export default function Offer() {
         }}
         />
         <Text style={styles.questions}> Safety Agreement: </Text>
-        
+        <BouncyCheckbox onPress={(isChecked) => {}} 
+          fillColor="#3FFF1B"
+          text="I promise to drive safe and sober"
+          textStyle={{ color: "white" }}
+        />
+
         <StatusBar style="auto" />
         </ScrollView>
         </KeyboardAvoidingView>
