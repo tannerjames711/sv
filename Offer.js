@@ -16,6 +16,8 @@ export default function Offer() {
   const [number, onChangeNumber] = React.useState('');
   const [addyVal1, onChangeAddy1] = React.useState('');
   const [addyVal2, onChangeAddy2] = React.useState('');
+  const [stateVal, onChangeState] = React.useState('');
+  const [cityVal, onChangeCity] = React.useState('');
   const [value, setValue] = useState(dayjs());
   const [selected, setSelected] = React.useState("");
   
@@ -58,15 +60,15 @@ export default function Offer() {
       />
         <TextInput
         style={styles.input}
-        onChangeText={onChangeAddy2}
-        value={addyVal2}
+        onChangeText={onChangeCity}
+        value={cityVal}
         placeholder="City"
         keyboardType="default"
       />
               <TextInput
         style={styles.input}
-        onChangeText={onChangeAddy2}
-        value={addyVal2}
+        onChangeText={onChangeState}
+        value={stateVal}
         placeholder="State"
         keyboardType="default"
       />

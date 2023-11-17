@@ -7,16 +7,36 @@ import { useNavigation } from '@react-navigation/native';
 import Offer from './Offer.js'
 
 const Stack = createNativeStackNavigator();
+const eventData = {
+  eventname: "Electric Daisy Carnival",
+  location: "Las Vegas",
+  date: "12/17"
+
+}
+
+
+function EventPost() {
+  const navigation = useNavigation();
+  return(
+    <Pressable style={styles.eventListing} onPress={() => navigation.navigate("Listing") }>
+      <Text style={styles.name}> {eventData.eventname}</Text>
+      <Text style={styles.sub}> {eventData.location} | {eventData.date}</Text>
+    </Pressable>
+  )
+}
 
 
 function HomeScreen() {
   return (
     <SafeAreaView style={styles.container}>
-        <Pressable style={styles.eventListing} onPress={() => navigation.navigate("Offer") }>
-        <Text style={styles.text}> Offer to Drive</Text>
-        <Text style={styles.text}> Offer to Drive</Text>
-
-    </Pressable>
+      <EventPost />
+      <EventPost />
+      <EventPost />
+      <EventPost />
+      <EventPost />
+      <EventPost />
+      <EventPost />
+      <EventPost />
       <StatusBar style="auto" />
     </SafeAreaView>
   );
@@ -68,6 +88,17 @@ export default function App() {
             }
           }}
             />
+           <Stack.Screen 
+          name="Listing" 
+          component={Offer}
+          options={{ 
+            headerTitle: '{eventData.eventname}',
+            headerTintColor: '#fff',
+            headerStyle: {
+              backgroundColor: 'black',
+            }
+          }}
+          />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -93,10 +124,25 @@ const styles = StyleSheet.create({
     alignItems: 'right',
     width: '95%',
     justifyContent: 'right',
-    paddingVertical: 5,
-    paddingHorizontal: 15,
-    borderRadius: 4,
+    padding: '3%',
+    borderRadius: 5,
     elevation: 3,
     backgroundColor: '#3D3D3D',
+    borderColor: '#3FFF1B',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    margin: '2%'
+  },
+  name: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
+  sub: {
+    color: 'grey',
+    fontSize: 15,
+    fontWeight: 'normal'
+
+
   }
 });
