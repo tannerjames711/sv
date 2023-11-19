@@ -5,13 +5,14 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import Offer from './Offer.js'
+import Listing from './Listing.js'
+
 
 const Stack = createNativeStackNavigator();
 const eventData = {
   eventname: "Electric Daisy Carnival",
   location: "Las Vegas",
   date: "12/17"
-
 }
 
 
@@ -90,9 +91,9 @@ export default function App() {
             />
            <Stack.Screen 
           name="Listing" 
-          component={Offer}
+          component={Listing}
           options={{ 
-            headerTitle: '{eventData.eventname}',
+            headerTitle: 'eventData.eventname}}',
             headerTintColor: '#fff',
             headerStyle: {
               backgroundColor: 'black',
