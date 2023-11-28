@@ -1,10 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Image, Pressable, SafeAreaView, SearchBar, Alert, Header } from "react-native";
+import { StyleSheet, Text, View, Image, Pressable, SafeAreaView, SearchBar, Alert, Header, ScrollView } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
-import Offer from './Offer.js'
+import Request from './Request.js';
+import SignUp from './SignUp.js';
+
+
 
 const postData = {
   driver: 'Sophia',
@@ -20,6 +23,7 @@ const postData = {
 
 
 function Post() {
+const navigation = useNavigation();
   return (
     <View style={styles.post}>
       <View style={styles.row1}>
@@ -28,7 +32,7 @@ function Post() {
           <Text style={styles.subtext}>${postData.price} /Person</Text>
         </View>
         <View style={styles.cell}>
-          <Pressable style={styles.bookride} onPress={() => navigation.navigate("Offer") }>
+          <Pressable style={styles.bookride} onPress={() => navigation.navigate("SignUp") }>
             <Text style={styles.text}> Book Ride</Text>
           </Pressable>
         </View>
@@ -39,10 +43,9 @@ function Post() {
           <Text style={styles.subtext}>
             {postData.add1}, {postData.city} {postData.state}, {postData.zip}
           </Text>
-          <Pressable style={styles.request} onPress={() => navigation.navigate("Offer") }>
+          <Pressable style={styles.request} onPress={() => navigation.navigate("Request") }>
             <Text style={styles.text}> Request New Pick-Up</Text>
           </Pressable>
-
         </View>
         <View style={styles.cellbr}>
           <Text style={styles.subheader}>Ride Back</Text>
@@ -57,13 +60,18 @@ function Post() {
 
 export default function Listing() {
   return (
+    <ScrollView>
     <SafeAreaView style={styles.container}>
       <Post />
       <Post />
-
-
+      <Post />
+      <Post />
+      <Post />
+      <Post />
       <StatusBar style="auto" />
     </SafeAreaView>
+    </ScrollView>
+
   );
 }
 
@@ -75,28 +83,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'right',
     color: 'white',
-  },
-  button: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 5,
-    paddingHorizontal: 15,
-    borderRadius: 4,
-    elevation: 3,
-    backgroundColor: '#3FFF1B',
-  },
-  eventListing: {
-    alignItems: 'right',
-    width: '95%',
-    justifyContent: 'right',
-    padding: '3%',
-    borderRadius: 5,
-    elevation: 3,
-    backgroundColor: '#3D3D3D',
-    borderColor: '#3FFF1B',
-    borderStyle: 'solid',
-    borderWidth: 1,
-    margin: '2%'
   },
   name: {
     color: 'white',
@@ -117,8 +103,6 @@ const styles = StyleSheet.create({
     borderBottomColor: 'black',
     borderBottomWidth: 3,
     padding: '1%'
-
-
   },
   row2: {
     flexDirection: 'row',
@@ -148,7 +132,8 @@ const styles = StyleSheet.create({
     margin: '.5%',
     width: '30%', 
     borderLeftColor: 'black',
-    borderLeftWidth: 3
+    borderLeftWidth: 3,
+    paddingLeft: '2%'
   },
   cellbl: {
     flex: 1,
@@ -158,7 +143,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#3D3D3D',
     margin: '.5%',
     borderRadius: 5,
-    width: '70%'
+    minWidth: '25%',
+    paddingRight: '1%'
   },
   post: {
     width: '95%',
@@ -191,7 +177,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     elevation: 3,
     backgroundColor: '#3FFF1B',
-    marginTop: '4%'
+    marginTop: '2%'
   },
   bookride:{
     width: '60%',
