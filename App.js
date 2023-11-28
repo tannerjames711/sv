@@ -71,6 +71,10 @@ export default function App() {
     <NavigationContainer>
     <Stack.Navigator>
         <Stack.Screen 
+            name="SignUp"
+            component={SignUp}
+          />
+        <Stack.Screen 
           name="Home" 
           component={HomeScreen} 
           options={{ 
@@ -112,10 +116,7 @@ export default function App() {
             }
           }}
           />
-          <Stack.Screen 
-            name="SignUp"
-            component={SignUp}
-          />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

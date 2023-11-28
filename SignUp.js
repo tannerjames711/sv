@@ -3,11 +3,15 @@ import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
+
 
 export default function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [auth, setAuth] = useState(null);
+  const navigation = useNavigation();
+
 
   const firebaseConfig = {
     apiKey: "AIzaSyAX754SV_qLKXcqj2SrJyfRZLDKRs6BZLI",
@@ -43,6 +47,7 @@ export default function SignUp() {
       if (auth) {
         await signInWithEmailAndPassword(auth, email, password);
         console.log('User signed in successfully!');
+        navigation.navigate("Home")
       } else {
         console.error('Auth object is not initialized');
       }
@@ -96,11 +101,8 @@ const styles = StyleSheet.create({
 },
 input: {
   height: 40,
-  margin: 12,
   padding: '5%',
   color: 'white',
   backgroundColor: '#3D3D3D',
-  minWidth: '90%',
-  borderRadius: 5
-}
+  minWidth: '90%',}
 });
