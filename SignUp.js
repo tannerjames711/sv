@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
@@ -55,11 +55,13 @@ export default function SignUp() {
     <View style={styles.container}>
       <Text style={styles.logintext}>Email:</Text>
       <TextInput
+        style={styles.input}
         placeholder="Enter your email"
         onChangeText={(text) => setEmail(text)}
       />
-      <Text>Password:</Text>
+      <Text style={styles.logintext}>Password:</Text>
       <TextInput
+        style={styles.input}
         placeholder="Enter your password"
         secureTextEntry
         onChangeText={(text) => setPassword(text)}
@@ -91,5 +93,14 @@ const styles = StyleSheet.create({
     color: '#3FFF1B',
     fontSize: 24,
     fontWeight: 'regular'
+},
+input: {
+  height: 40,
+  margin: 12,
+  padding: '5%',
+  color: 'white',
+  backgroundColor: '#3D3D3D',
+  minWidth: '90%',
+  borderRadius: 5
 }
 });
