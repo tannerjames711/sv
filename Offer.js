@@ -15,11 +15,12 @@ const Stack = createNativeStackNavigator();
 
 
 export default function Offer() {
-  const [number, onChangeNumber] = React.useState('');
-  const [addyVal1, onChangeAddy1] = React.useState('');
-  const [addyVal2, onChangeAddy2] = React.useState('');
-  const [stateVal, onChangeState] = React.useState('');
-  const [cityVal, onChangeCity] = React.useState('');
+  const [number, onChangeNumber] = React.useState('Event Name');
+  const [addyVal1, onChangeAddy1] = React.useState('Address Line 1');
+  const [addyVal2, onChangeAddy2] = React.useState('Address Line 2');
+  const [stateVal, onChangeState] = React.useState('State');
+  const [cityVal, onChangeCity] = React.useState('City');
+  const [chargeVal, onChangeCharge] = React.useState('0.00');
   const [value, setValue] = useState(dayjs());
   const [selected, setSelected] = React.useState("");
   
@@ -131,12 +132,12 @@ export default function Offer() {
         <Text style={styles.questions}> How much do you want to charge? </Text>
         <TextInput
         style={styles.input}
-        onChangeText={onChangeAddy1}
-        value={addyVal1}
+        onChangeText={onChangeCharge}
+        value={chargeVal}
         placeholder="Address Line 1"
         keyboardType="numeric"
       />
-        <Text style={styles.questions}> When are meeting to drive back? </Text>
+        <Text style={styles.questions}> When are you meeting to drive back? </Text>
         <SelectList 
         setSelected={(val) => setSelected(val)} 
         data={data} 
@@ -146,13 +147,18 @@ export default function Offer() {
         dropdownStyles = {{
           backgroundColor: "#3D3D3D",
           color: 'white',
-          width: '50%'
+          width: '50%',
+          marginLeft: '3%',
+          borderColor: '#3D3D3D'
 
         }}
         boxStyles = {{
           backgroundColor: "#3D3D3D",
           color: 'white',
-          width: '50%'
+          width: '50%',
+          marginLeft: '3%',
+          borderColor: '#3D3D3D'
+
         }}
         dropdownTextStyles = {{
           color: 'white'
@@ -168,13 +174,17 @@ export default function Offer() {
         dropdownStyles = {{
           backgroundColor: "#3D3D3D",
           color: 'white',
-          width: '50%'
-
+          width: '50%',
+          marginLeft: '3%',
+          borderColor: '#3D3D3D'
         }}
         boxStyles = {{
           backgroundColor: "#3D3D3D",
           color: 'white',
-          width: '50%'
+          width: '50%',
+          marginLeft: '3%',
+          borderColor: '#3D3D3D'
+
         }}
         dropdownTextStyles = {{
           color: 'white'
@@ -185,6 +195,7 @@ export default function Offer() {
           fillColor="#3FFF1B"
           text="I promise to drive safe and sober"
           textStyle={{ color: "white" }}
+          iconStyle={{ marginLeft: "5%" }}
         />
 
       <Pressable style={styles.button} onPress={handlePress}>
@@ -207,20 +218,23 @@ export default function Offer() {
     button: {
       alignItems: 'center',
       justifyContent: 'center',
-      paddingVertical: 8,
-      paddingHorizontal: 15,
+      padding: '3%',
+      margin: '3%',
+      marginTop: '5%',
       borderRadius: 4,
       elevation: 3,
       backgroundColor: '#3FFF1B',
     }, 
     input: {
         height: 40,
-        margin: 12,
-        padding: '5%',
         color: 'white',
+        margin: '1%',
+        marginLeft: "3%",
+        marginRight: "3%",
+        paddingLeft: '3%',
         backgroundColor: '#3D3D3D',
         minWidth: '90%',
-        borderRadius: 5
+        borderRadius: 4
     },
     questions: {
         margin: '3%',

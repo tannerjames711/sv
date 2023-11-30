@@ -14,10 +14,10 @@ const Stack = createNativeStackNavigator();
 
 export default function Request() {
   const [number, onChangeNumber] = React.useState('');
-  const [addyVal1, onChangeAddy1] = React.useState('');
-  const [addyVal2, onChangeAddy2] = React.useState('');
-  const [stateVal, onChangeState] = React.useState('');
-  const [cityVal, onChangeCity] = React.useState('');
+  const [addyVal1, onChangeAddy1] = React.useState('Address Line 1');
+  const [addyVal2, onChangeAddy2] = React.useState('Adress Line 2');
+  const [stateVal, onChangeState] = React.useState('State');
+  const [cityVal, onChangeCity] = React.useState('City');
   
     return (
       <SafeAreaView style={styles.container}>
@@ -52,6 +52,9 @@ export default function Request() {
         placeholder="State"
         keyboardType="default"
       />
+      <Pressable style={styles.button}>
+        <Text>Submit Request</Text>
+      </Pressable>
         <StatusBar style="auto" />
         </ScrollView>
         </KeyboardAvoidingView>
@@ -68,21 +71,24 @@ export default function Request() {
     button: {
       alignItems: 'center',
       justifyContent: 'center',
-      paddingVertical: 8,
-      paddingHorizontal: 15,
+      padding: '3%',
+      margin: '3%',
+      marginTop: '5%',
       borderRadius: 4,
       elevation: 3,
       backgroundColor: '#3FFF1B',
     }, 
     input: {
-        height: 40,
-        margin: 12,
-        padding: '5%',
-        color: 'white',
-        backgroundColor: '#3D3D3D',
-        minWidth: '90%',
-        borderRadius: 5
-    },
+      height: 40,
+      color: 'white',
+      margin: '1%',
+      marginLeft: "3%",
+      marginRight: "3%",
+      paddingLeft: '3%',
+      backgroundColor: '#3D3D3D',
+      minWidth: '90%',
+      borderRadius: 4
+  },
     questions: {
         margin: '3%',
         color: '#3FFF1B',
