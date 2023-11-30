@@ -70,10 +70,10 @@ export default function App() {
   return (
     <NavigationContainer>
     <Stack.Navigator>
-        <Stack.Screen 
+        {/* <Stack.Screen 
             name="SignUp"
             component={SignUp}
-          />
+          /> */}
         <Stack.Screen 
           name="Home" 
           component={HomeScreen} 

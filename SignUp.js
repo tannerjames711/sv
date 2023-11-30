@@ -50,6 +50,8 @@ export default function SignUp() {
         navigation.navigate("Home")
       } else {
         console.error('Auth object is not initialized');
+        navigation.navigate("SignUp")
+
       }
     } catch (error) {
       console.error('Error signing in:', error.message);
