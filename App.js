@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Image, Pressable, SafeAreaView, SearchBar, Alert, Header } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -8,6 +8,8 @@ import Offer from './Offer.js';
 import Listing from './Listing.js';
 import Request from './Request.js';
 import SignUp from './SignUp.js';
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { initializeApp } from "firebase/app";
 
 
 
@@ -18,33 +20,69 @@ const eventData = {
   date: "12/17"
 }
 
+const firebaseConfig = {
+  apiKey: "AIzaSyAX754SV_qLKXcqj2SrJyfRZLDKRs6BZLI",
+  authDomain: "rollingapp-87815.firebaseapp.com",
+  projectId: "rollingapp-87815",
+  storageBucket: "rollingapp-87815.appspot.com",
+  messagingSenderId: "396937010546",
+  appId: "1:396937010546:web:e472bd306a0bc5f4a1d1eb"
+};
 
-function EventPost() {
-  const navigation = useNavigation();
-  return(
-    <Pressable style={styles.eventListing} onPress={() => navigation.navigate("Listing") }>
-      <Text style={styles.name}> {eventData.eventname}</Text>
-      <Text style={styles.sub}> {eventData.location} | {eventData.date}</Text>
-    </Pressable>
-  )
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+
+// Initialize Cloud Firestore and get a reference to the service
+const db = getFirestore(app);
+
+
+function EventPost({ eventName, eventCity }) {
+const navigation = useNavigation();
+return (
+<Pressable style={styles.eventListing} onPress={() => navigation.navigate("Listing")}>
+  <Text style={styles.name}>{eventName}</Text>
+  <Text style={styles.sub}>{eventCity}</Text>
+</Pressable>
+);
 }
-
 
 function HomeScreen() {
-  return (
-    <SafeAreaView style={styles.container}>
-      <EventPost />
-      <EventPost />
-      <EventPost />
-      <EventPost />
-      <EventPost />
-      <EventPost />
-      <EventPost />
-      <EventPost />
-      <StatusBar style="auto" />
-    </SafeAreaView>
-  );
+const [events, setEvents] = useState([]);
+
+useEffect(() => {
+  const fetchData = async () => {
+  const querySnapshot = await getDocs(collection(db, "post"));
+  const uniqueEventNames = new Set(); // Use a Set to track unique event names
+  const eventData = [];
+
+  querySnapshot.forEach((doc) => {
+    const eventName = doc.data().eventName;
+
+    // Check if the event name is not already in the set
+    if (!uniqueEventNames.has(eventName)) {
+      const eventCity = doc.data().offerCity;
+      eventData.push({ eventName, eventCity });
+      uniqueEventNames.add(eventName); // Add the event name to the set
+    }
+  });
+
+  setEvents(eventData);
+};
+
+fetchData();
+}, []);
+
+return (
+<SafeAreaView style={styles.container}>
+  {events.map((event, index) => (
+    <EventPost key={index} eventName={event.eventName} eventCity={event.eventCity} />
+  ))}
+  <StatusBar style="auto" />
+</SafeAreaView>
+);
 }
+
 
 function HeaderLogo() {
   return (
@@ -98,7 +136,7 @@ export default function App() {
           name="Listing" 
           component={Listing}
           options={{ 
-            headerTitle: eventData.eventname,
+            headerTitle: 'Listings',
             headerTintColor: '#fff',
             headerStyle: {
               backgroundColor: 'black',

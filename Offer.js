@@ -10,6 +10,7 @@ import { SelectList } from 'react-native-dropdown-select-list';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, addDoc } from "firebase/firestore"; 
+import TicketmasterSearch from './EventSearch';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +24,8 @@ export default function Offer() {
   const [chargeVal, onChangeCharge] = React.useState('0.00');
   const [value, setValue] = useState(dayjs());
   const [selected, setSelected] = React.useState("");
+  const navigation = useNavigation();
+
   
   const data = [
     {key:'1', value:'10 min'},
@@ -52,8 +55,7 @@ export default function Offer() {
     
     // Initialize Cloud Firestore and get a reference to the service
     const db = getFirestore(app);
-    
-    
+  
     const handlePress = () => {
       addDoc(collection(db, "post"), {
         eventName: number,
@@ -61,10 +63,12 @@ export default function Offer() {
         offerAddyL2: addyVal2,
         offerCity: cityVal,
         offerState: stateVal,
-
+        offerDate: value,
+        offerCharge: chargeVal,
       })
         .then((docRef) => {
           console.log("Document written with ID: ", docRef.id);
+          navigation.navigate("Home")
         })
         .catch((e) => {
           console.error("Error adding document: ", e);
